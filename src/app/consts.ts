@@ -9,4 +9,4 @@ export const WS_API_BASE_ENDPOINT = 'wss://stream.binance.com:9443';
 export const WS_ALL_MARKETS_DAILY_STREAM = '!ticker@arr';
 
 export const MAIN_SYMBOL = 'BTC';
-export const LIMIT = '500'; // max 1000;
+export const LIMIT = 500; // max 1000;

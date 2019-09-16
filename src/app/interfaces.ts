@@ -39,3 +39,9 @@ export interface ExchangeInfo {
 export interface TradingSymbol {
   symbol: string;
 }
+
+export interface CoinKlines {
+  name: string;
+  data: Array<WebSocketK>;
+  tagged: boolean;
+}
