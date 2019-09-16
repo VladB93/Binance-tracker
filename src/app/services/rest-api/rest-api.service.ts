@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { REST_API_BASE_ENDPOINT, REST_API_EXCHANGE_INFO_ENDPOINT, PROXY, REST_API_KLINES_ENDPOINT, MAIN_SYMBOL } from '../../consts';
 import { ExchangeInfo, TradingSymbol, CoinKlines } from '../../interfaces';
 import { convertRestKlineToWebSocketK, toBeTagged } from 'src/app/helpers';
+import { SymbolStatus } from 'src/app/enums';
 
 
 @Injectable({
@@ -29,16 +30,17 @@ export class RestApiService {
       this.http.get(`${REST_API_BASE_ENDPOINT}${REST_API_KLINES_ENDPOINT}?symbol=${e.symbol}&interval=1m`));
 
     forkJoin(requests).subscribe((e: Array<Array<any>>) => {
-      const klinesForMainSymbolCoins = this.mainSymbolCoins.map((name: string, i: number) => {
+      const klinesForMainSymbolCoins = this.mainSymbolCoins.map((coin: TradingSymbol, i: number) => {
         const convertedKLines = e[i].map((kline: Array<any>) => convertRestKlineToWebSocketK(kline)); // convert from array to WebSocketK
         let coinKlines: CoinKlines;
         coinKlines = {
-          name,
+          coin,
           data: convertedKLines,
           tagged: toBeTagged(convertedKLines),
         }
         return coinKlines;
       });
+      console.log(klinesForMainSymbolCoins.filter((e: CoinKlines) => e.tagged && e.coin.status == SymbolStatus.TRADING));
       return klinesForMainSymbolCoins.filter((e: CoinKlines) => e.tagged);
     })
 

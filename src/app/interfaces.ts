@@ -1,4 +1,4 @@
-import { KlineIntervals } from './enums';
+import { KlineIntervals, SymbolStatus } from './enums';
 
 export interface WebSocketKlineStream {
   stream: string;
@@ -38,10 +38,11 @@ export interface ExchangeInfo {
 
 export interface TradingSymbol {
   symbol: string;
+  status: SymbolStatus;
 }
 
 export interface CoinKlines {
-  name: string;
+  coin: TradingSymbol;
   data: Array<WebSocketK>;
   tagged: boolean;
 }
