@@ -55,3 +55,14 @@ export interface BinanceKline {
 export interface ObjectKlines {
   [prop: string]: CoinKlines;
 }
+
+export interface TaggedGridEntry {
+  Ticker?: string;
+  Price?: number;
+  'Daily Vol'?: number;
+  'Price Spike'?: number;
+  '% change(3m)'?: number;
+  '% change(15m)'?: number;
+  '% change(1h)'?: number;
+  '% change(4h)'?: number;
+}

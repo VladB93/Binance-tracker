@@ -1,0 +1,8 @@
+<igx-grid [data]="data">
+    <igx-column field="Ticker" dataType="string"></igx-column>
+    <igx-column field="Price" [formatter]="formatValue" dataType="number" sortable="true"></igx-column>
+    <igx-column field="% change(3m)" dataType="string"></igx-column>
+    <igx-column field="% change(15m)" dataType="number"></igx-column>
+    <igx-column field="% change(1h)" dataType="number"></igx-column>
+    <igx-column field="% change(4h)" dataType="number"></igx-column>
+</igx-grid>

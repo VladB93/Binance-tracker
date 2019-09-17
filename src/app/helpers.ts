@@ -100,6 +100,13 @@ export function toBeTagged(klines: Array<WebSocketK>) {
   return false;
 }
 
+export function calculateDifferenceForInterval(data: Array<WebSocketK>, interval: number) {
+  const l = LIMIT - 1;
+  return Number(
+    calcPercentage(Number(data[l - interval].ClosePrice), Number(data[l].ClosePrice)).toFixed(2)
+  );
+}
+
 export function calcPercentage(startNum: number, endNum: number): number {
   return ((endNum - startNum) / startNum) * 100;
 }
