@@ -33,9 +33,7 @@ export class StoreService {
     newData.shift();
     newData.push(wsStream.Kline);
     this.coinKlinesData[streamName].data = newData;
-    if (!this.coinKlinesData[streamName].tagged) {
-      this.coinKlinesData[streamName].tagged = toBeTagged(newData);
-    }
+    this.coinKlinesData[streamName].tagged = toBeTagged(newData);
     this.coinKlinesSubject.next(this.coinKlinesData);
   }
 }

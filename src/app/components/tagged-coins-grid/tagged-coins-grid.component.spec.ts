@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TaggedCoinsTableComponent } from './tagged-coins-table.component';
+import { TaggedCoinsGridComponent } from './tagged-coins-grid.component';
 
 describe('TaggedCoinsTableComponent', () => {
-  let component: TaggedCoinsTableComponent;
-  let fixture: ComponentFixture<TaggedCoinsTableComponent>;
+  let component: TaggedCoinsGridComponent;
+  let fixture: ComponentFixture<TaggedCoinsGridComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TaggedCoinsTableComponent ]
+      declarations: [ TaggedCoinsGridComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TaggedCoinsTableComponent);
+    fixture = TestBed.createComponent(TaggedCoinsGridComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
