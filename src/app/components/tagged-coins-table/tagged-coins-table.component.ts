@@ -11,8 +11,8 @@ export class TaggedCoinsTableComponent implements OnInit {
   constructor(private storeService: StoreService) { }
 
   ngOnInit() {
-    // this.storeService.init();
-    this.storeService.coinKlines.subscribe(e => console.log(e));
+    this.storeService.init();
+    this.storeService.coinKlinesSubject.subscribe(e => console.log(e));
   }
 
 }

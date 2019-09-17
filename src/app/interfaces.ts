@@ -8,7 +8,7 @@ export interface WebSocketKlineStream {
 export interface WebSocketKline {
   EventType: string;
   EventTime: number;
-  SymbolName: string;
+  StreamName: string;
   Kline: WebSocketK;
 }
 
@@ -45,4 +45,13 @@ export interface CoinKlines {
   coin: TradingSymbol;
   data: Array<WebSocketK>;
   tagged: boolean;
+}
+
+export interface BinanceKline {
+  data: any;
+  stream: any;
+}
+
+export interface ObjectKlines {
+  [prop: string]: CoinKlines;
 }

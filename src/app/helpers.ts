@@ -1,5 +1,5 @@
-import { WebSocketK } from "./interfaces";
-import { LIMIT } from "./consts";
+import { WebSocketK, WebSocketKline, BinanceKline, CoinKlines } from './interfaces';
+import { LIMIT } from './consts';
 
 /*
 KLine format from REST API
@@ -39,6 +39,43 @@ export function convertRestKlineToWebSocketK(data: Array<any>): WebSocketK {
   return webSocketK;
 }
 
+export function convertBinanceKlineToWebSocketKline(kline: BinanceKline) {
+  const { data, stream } = kline;
+  const { k } = data;
+  const webSocketKline: WebSocketKline = {
+    EventTime: data.E,
+    EventType: data.e,
+    StreamName: stream,
+    Kline: {
+      StartTime: k.t,
+      CloseTime: k.T,
+      SymbolName: k.s,
+      Interval: k.i,
+      FirstTradeId: k.f,
+      LastTradeId: k.L,
+      OpenPrice: k.o,
+      ClosePrice: k.c,
+      HighPrice: k.h,
+      LowPrice: k.l,
+      BaseVolume: k.v,
+      NumberOfTrades: k.n,
+      Closed: k.x,
+      QuoteVolume: k.q,
+      TakerBaseVolume: k.V,
+      TakerQuoteVolume: k.Q
+    }
+  };
+  return webSocketKline;
+}
+
+export function convertArrayKlineToObject(data: Array<CoinKlines>) {
+  const klineObject = {};
+  for (const entry of data) {
+    klineObject[entry.coin.symbol] = entry;
+  }
+  return klineObject;
+}
+
 /*
 Req:
 1) % price change on 1min > 1%
@@ -54,18 +91,9 @@ export function toBeTagged(klines: Array<WebSocketK>) {
   const last15 = 15;
   // list criteria here
   if (
-    calcPercentage(
-      Number(klines[l - last1].ClosePrice),
-      Number(klines[l].ClosePrice)
-    ) > 1 ||
-    calcPercentage(
-      Number(klines[l - last3].ClosePrice),
-      Number(klines[l].ClosePrice)
-    ) > 3 ||
-    calcPercentage(
-      Number(klines[l - last15].ClosePrice),
-      Number(klines[l].ClosePrice)
-    ) > 5
+    calcPercentage(Number(klines[l - last1].ClosePrice), Number(klines[l].ClosePrice)) > 1 ||
+    calcPercentage(Number(klines[l - last3].ClosePrice), Number(klines[l].ClosePrice)) > 3 ||
+    calcPercentage(Number(klines[l - last15].ClosePrice), Number(klines[l].ClosePrice)) > 5
   ) {
     return true;
   }
