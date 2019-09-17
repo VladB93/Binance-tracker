@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RestApiService } from 'src/app/services/rest-api/rest-api.service';
+import { StoreService } from 'src/app/services/store/store.service';
 
 @Component({
   selector: 'app-tagged-coins-table',
@@ -8,10 +8,11 @@ import { RestApiService } from 'src/app/services/rest-api/rest-api.service';
 })
 export class TaggedCoinsTableComponent implements OnInit {
 
-  constructor(private restApiService: RestApiService) { }
+  constructor(private storeService: StoreService) { }
 
   ngOnInit() {
-    this.restApiService.loadExchangeInfo();
+    // this.storeService.init();
+    this.storeService.coinKlines.subscribe(e => console.log(e));
   }
 
 }
