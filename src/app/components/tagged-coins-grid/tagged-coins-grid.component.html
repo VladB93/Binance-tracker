@@ -1,8 +1,20 @@
-<igx-grid [data]="data">
-    <igx-column field="Ticker" dataType="string"></igx-column>
-    <igx-column field="Price" [formatter]="formatValue" dataType="number" sortable="true"></igx-column>
-    <igx-column field="% change(3m)" dataType="string"></igx-column>
-    <igx-column field="% change(15m)" dataType="number"></igx-column>
-    <igx-column field="% change(1h)" dataType="number"></igx-column>
-    <igx-column field="% change(4h)" dataType="number"></igx-column>
+<igx-grid [data]="data" [width]="'60%'" [height]="'400px'" [emptyGridTemplate]="loader">
+    <igx-column field="Ticker" dataType="string" [sortable]="true"></igx-column>
+    <igx-column field="Price" [formatter]="formatValue" dataType="number" [sortable]="true"></igx-column>
+    <igx-column field="% change(3m)" dataType="string" [sortable]="true"></igx-column>
+    <igx-column field="% change(15m)" dataType="number" [sortable]="true"></igx-column>
+    <igx-column field="% change(1h)" dataType="number" [sortable]="true"></igx-column>
+    <igx-column field="% change(4h)" dataType="number" [sortable]="true"></igx-column>
 </igx-grid>
+
+<ng-template #loader>
+    <div class="sample-wrapper">
+        <section class="sample-content">
+            <article class="sample-column">
+                <div class="circular-container">
+                    <igx-circular-bar [animate]="false" [indeterminate]="true" text="Loading..."></igx-circular-bar>
+                </div>
+            </article>
+        </section>
+    </div>
+</ng-template>
