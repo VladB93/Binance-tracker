@@ -6,6 +6,7 @@ export const REST_API_SERVER_TIME_ENDPOINT = '/api/v1/time';
 export const REST_API_KLINES_ENDPOINT = '/api/v1/klines';
 
 export const WS_API_BASE_ENDPOINT = 'wss://stream.binance.com:9443';
+export const WS_API_MULTISTREAM = '/stream?streams=';
 export const WS_ALL_MARKETS_DAILY_STREAM = '!ticker@arr';
 
 export const MAIN_SYMBOL = 'BTC';
