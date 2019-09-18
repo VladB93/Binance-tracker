@@ -85,7 +85,7 @@ Req:
 */
 
 export function toBeTagged(klines: Array<WebSocketK>) {
-  const l = LIMIT - 1; // match last of array;
+  const l = klines.length != LIMIT ? klines.length - 1 : LIMIT - 1; // match last of array;
   const last1 = 1;
   const last3 = 3;
   const last15 = 15;
@@ -100,10 +100,11 @@ export function toBeTagged(klines: Array<WebSocketK>) {
   return false;
 }
 
-export function calculateDifferenceForInterval(data: Array<WebSocketK>, interval: number) {
-  const l = LIMIT - 1;
+export function calculateDifferenceForInterval(klines: Array<WebSocketK>, interval: number) {
+  const l = klines.length != LIMIT ? klines.length - 1 : LIMIT - 1; // match last of array;
+
   return Number(
-    calcPercentage(Number(data[l - interval].ClosePrice), Number(data[l].ClosePrice)).toFixed(2)
+    calcPercentage(Number(klines[l - interval].ClosePrice), Number(klines[l].ClosePrice)).toFixed(2)
   );
 }
 
