@@ -1,4 +1,4 @@
-export const PROXY = 'https://cors-anywhere.herokuapp.com';
+export const PROXY = 'https://cors-binance.herokuapp.com';
 export const REST_API_BASE_ENDPOINT = `${PROXY}/https://api.binance.com`;
 export const REST_API_PING_ENDPOINT = 'api/v1/ping';
 export const REST_API_EXCHANGE_INFO_ENDPOINT = '/api/v1/exchangeInfo';
