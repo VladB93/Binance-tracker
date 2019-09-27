@@ -1,4 +1,4 @@
-<igx-grid [data]="data" [width]="'60%'" [height]="'400px'" [emptyGridTemplate]="loader">
+<igx-grid [data]="data" [width]="'60%'" [height]="'400px'" [emptyGridTemplate]="loader" [displayDensity]="'compact'">
     <igx-column field="Ticker" dataType="string" [sortable]="true"></igx-column>
     <igx-column field="Price" [formatter]="formatValue" dataType="number" [sortable]="true"></igx-column>
     <igx-column field="% change(3m)" dataType="string" [sortable]="true"></igx-column>
@@ -8,7 +8,7 @@
 </igx-grid>
 
 <ng-template #loader>
-    <div class="sample-wrapper">
+    <div class="sample-wrapper" *ngIf="loading">
         <section class="sample-content">
             <article class="sample-column">
                 <div class="circular-container">
@@ -17,4 +17,13 @@
             </article>
         </section>
     </div>
+    <div class="sample-wrapper" *ngIf="!loading">
+            <section class="sample-content">
+                <article class="sample-column">
+                    <div class="circular-container">
+                        <span>No coins match the criteria. Another check will be made in {{ timer }} seconds.</span>
+                    </div>
+                </article>
+            </section>
+        </div>
 </ng-template>
