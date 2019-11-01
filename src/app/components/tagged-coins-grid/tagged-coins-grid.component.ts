@@ -12,7 +12,7 @@ import { TimeInterval } from "rxjs";
 })
 export class TaggedCoinsGridComponent implements OnInit, OnDestroy {
   private interval;
-  private timer = 0;
+  public timer = 0;
   public loading = true;
   public data: TaggedGridEntry[] = [];
 
