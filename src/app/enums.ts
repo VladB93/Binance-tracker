@@ -24,3 +24,8 @@ export enum SymbolStatus {
   AUCTION_MATCH = 'AUCTION_MATCH',
   BREAK = 'BREAK'
 }
+
+export enum WebSocketFeed {
+  klines = 'klines',
+  dailyVolume = 'dailyVolume'
+}

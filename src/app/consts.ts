@@ -4,6 +4,7 @@ export const REST_API_PING_ENDPOINT = 'api/v1/ping';
 export const REST_API_EXCHANGE_INFO_ENDPOINT = '/api/v1/exchangeInfo';
 export const REST_API_SERVER_TIME_ENDPOINT = '/api/v1/time';
 export const REST_API_KLINES_ENDPOINT = '/api/v1/klines';
+export const REST_API_DAILY_VOLUME = '/api/v1/ticker/24hr';
 
 export const WS_API_BASE_ENDPOINT = 'wss://stream.binance.com:9443';
 export const WS_API_MULTISTREAM = '/stream?streams=';

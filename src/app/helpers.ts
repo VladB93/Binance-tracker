@@ -1,4 +1,4 @@
-import { WebSocketK, WebSocketKline, BinanceKline, CoinKlines } from './interfaces';
+import { WebSocketK, WebSocketKline, BinanceKline, CoinKlines, DailyVolume } from './interfaces';
 import { LIMIT } from './consts';
 
 /*
@@ -39,7 +39,14 @@ export function convertRestKlineToWebSocketK(data: Array<any>): WebSocketK {
   return webSocketK;
 }
 
-export function convertBinanceKlineToWebSocketKline(kline: BinanceKline) {
+export function convertToDailyVolume(volumeKline: BinanceKline): DailyVolume {
+  return {
+    DailyVolume: Number(volumeKline.data.q),
+    SymbolName: volumeKline.data.s
+  }
+}
+
+export function convertBinanceKlineToWebSocketKline(kline: BinanceKline): WebSocketKline {
   const { data, stream } = kline;
   const { k } = data;
   const webSocketKline: WebSocketKline = {
