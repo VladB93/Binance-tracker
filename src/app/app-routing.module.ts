@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { TaggedCoinsGridComponent } from './components/tagged-coins-grid/tagged-coins-grid.component';
+import { HomeComponent } from './components/home/home.component';
 
-const routes: Routes = [{ component: TaggedCoinsGridComponent, path: '' }];
+const routes: Routes = [{ component: HomeComponent, path: '' }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

@@ -7,10 +7,14 @@ import { IgxGridModule, IgxProgressBarModule } from 'igniteui-angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TaggedCoinsGridComponent } from './components/tagged-coins-grid/tagged-coins-grid.component';
+import { HomeComponent } from './components/home/home.component';
+import { FilterFormComponent } from './components/filter-form/filter-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    HomeComponent,
+    FilterFormComponent,
     TaggedCoinsGridComponent
   ],
   imports: [

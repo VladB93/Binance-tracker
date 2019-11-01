@@ -24,3 +24,19 @@ export enum SymbolStatus {
   AUCTION_MATCH = 'AUCTION_MATCH',
   BREAK = 'BREAK'
 }
+
+export enum FilterType {
+  price = 'Price',
+  volume = 'Volume'
+}
+
+export enum IntervalType {
+  m = 'm',
+  h = 'h'
+}
+
+export enum FactorType {
+  'less' = 'Less Than',
+  'more' = 'More Than',
+  'equal' = 'Equal'
+}

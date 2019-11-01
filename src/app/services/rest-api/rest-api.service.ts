@@ -21,7 +21,7 @@ export class RestApiService {
     return this.http.get(`${REST_API_BASE_ENDPOINT}${REST_API_EXCHANGE_INFO_ENDPOINT}`)
       .subscribe((data: ExchangeInfo) => {
         this.mainSymbolCoins = data.symbols.filter((e: TradingSymbol) =>
-            e.symbol.includes(MAIN_SYMBOL)  && e.status === SymbolStatus.TRADING)
+            e.symbol.includes(MAIN_SYMBOL)  && e.status === SymbolStatus.TRADING).slice(0, 0)
         this.loadKlines();
     });
   }
