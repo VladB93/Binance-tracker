@@ -31,12 +31,11 @@ export enum FilterType {
 }
 
 export enum IntervalType {
-  m = 'm',
-  h = 'h'
+  m = 'Minute(s)',
+  h = 'Hour(s)'
 }
 
-export enum FactorType {
-  'less' = 'Less Than',
-  'more' = 'More Than',
-  'equal' = 'Equal'
+export enum ComparisonType {
+  'moreOrEqual' = 'More or Equal',
+  'lessOrEqual' = 'Less or Equal',
 }

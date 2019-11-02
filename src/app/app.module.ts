@@ -2,13 +2,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { IgxGridModule, IgxProgressBarModule } from 'igniteui-angular';
+import { IgxGridModule, IgxProgressBarModule, IgxDialogModule, IgxSelectModule, IgxInputGroupModule, IgxRadioModule } from 'igniteui-angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TaggedCoinsGridComponent } from './components/tagged-coins-grid/tagged-coins-grid.component';
 import { HomeComponent } from './components/home/home.component';
 import { FilterFormComponent } from './components/filter-form/filter-form.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,8 +23,13 @@ import { FilterFormComponent } from './components/filter-form/filter-form.compon
     AppRoutingModule,
     HttpClientModule,
     IgxGridModule,
+    IgxDialogModule,
+    FormsModule,
+    IgxInputGroupModule,
     IgxProgressBarModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    IgxSelectModule,
+    IgxRadioModule
   ],
   providers: [],
   bootstrap: [AppComponent]

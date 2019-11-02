@@ -1,4 +1,4 @@
-import { KlineIntervals, SymbolStatus, FilterType, IntervalType, FactorType } from './enums';
+import { KlineIntervals, SymbolStatus, FilterType, IntervalType, ComparisonType } from './enums';
 
 export interface WebSocketKlineStream {
   stream: string;
@@ -68,9 +68,9 @@ export interface TaggedGridEntry {
 }
 
 export interface Filter {
-  type: FilterType;
-  interval: number;
-  intervalType: IntervalType;
-  factor: FactorType;
-  percentage: number;
+  type?: FilterType;
+  interval?: number;
+  intervalType?: IntervalType;
+  comparison?: ComparisonType;
+  percentage?: number;
 }
