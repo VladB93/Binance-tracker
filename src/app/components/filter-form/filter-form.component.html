@@ -7,30 +7,33 @@
     [closeOnOutsideSelect]="false"
     width="'400px'"
     >
-    <form class="filter-form">
-        <igx-radio [(ngModel)]="filter.type" [value]="FilterType.price" name="FilterType">{{FilterType.price}}</igx-radio>
-        <igx-radio [(ngModel)]="filter.type" [value]="FilterType.volume" name="FilterType">{{FilterType.volume}}</igx-radio>
-        <ng-container *ngIf="filter.type === FilterType.price">
+    <form class="filter-form" [formGroup]="filterForm">
+        <igx-radio-group name="type" formControlName="type">
+            <igx-radio name="FilterType" [value]="FilterType.price">{{FilterType.price}}</igx-radio>
+            <igx-radio name="FilterType" [value]="FilterType.volume">{{FilterType.volume}}</igx-radio>
+        </igx-radio-group>
+        
+        <ng-container *ngIf="filterForm.value.type === FilterType.price">
             <span class="filter-form-header">Price Change</span>
-            <igx-radio [(ngModel)]="filter.comparison" [value]="ComparisonType.lessOrEqual" name="ComparisonType">{{ComparisonType.lessOrEqual}}</igx-radio>
-            <igx-radio [(ngModel)]="filter.comparison" [value]="ComparisonType.moreOrEqual" name="ComparisonType">{{ComparisonType.moreOrEqual}}</igx-radio>
-            <ng-container *ngIf="filter.comparison === ComparisonType.lessOrEqual || filter.comparison === ComparisonType.moreOrEqual">
+            <igx-radio-group name="type" formControlName="comparison">
+                <igx-radio [value]="ComparisonType.lessOrEqual" name="ComparisonType">{{ComparisonType.lessOrEqual}}</igx-radio>
+                <igx-radio [value]="ComparisonType.moreOrEqual" name="ComparisonType">{{ComparisonType.moreOrEqual}}</igx-radio>
+            </igx-radio-group>
+            <ng-container *ngIf="filterForm.value.comparison != null">
                 <igx-input-group>   
                     <igx-prefix>to</igx-prefix>      
-                        <input igxInput name="percentage" type="number" [(ngModel)]="filter.percentage" required/>
+                        <input igxInput name="percentage" formControlName="percentage" type="number" required/>
                     <igx-suffix>%</igx-suffix>
                 </igx-input-group>
                 <span class="filter-form-header">In the past</span>
                 <igx-input-group>
-                    <input igxInput name="interval" type="number" [value]="filter.interval" required (onchange)="setValue($event)" max=500
-                    />
+                    <input igxInput name="interval" type="number" formControlName="interval" required/>
                 </igx-input-group>
-                <igx-radio [(ngModel)]="filter.intervalType" [value]="IntervalType.m" name="IntervalType">{{IntervalType.m}}</igx-radio>
-                <igx-radio [(ngModel)]="filter.intervalType" [value]="IntervalType.h" name="IntervalType">{{IntervalType.h}}</igx-radio>
+                Minute(s)
             </ng-container>
            
         </ng-container>
-        <ng-container *ngIf="filter.type === FilterType.volume">
+        <ng-container *ngIf="filterForm.type === FilterType.volume">
             <span>change</span>
             <label igxLabel for="phone">Phone</label>
             <!-- <input igxInput name="phone" type="text" [(ngModel)]="user.phone" /> -->

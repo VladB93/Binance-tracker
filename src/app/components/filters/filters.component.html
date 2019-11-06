@@ -1,0 +1,3 @@
+<igx-checkbox *ngFor="let filter of filters" [checked]="filter.toApply">
+  {{ filter.type }} change {{ filter.comparison}} to {{filter.percentage}}% in the last {{filter.interval}} minutes
+</igx-checkbox>

@@ -30,11 +30,6 @@ export enum FilterType {
   volume = 'Volume'
 }
 
-export enum IntervalType {
-  m = 'Minute(s)',
-  h = 'Hour(s)'
-}
-
 export enum ComparisonType {
   'moreOrEqual' = 'More or Equal',
   'lessOrEqual' = 'Less or Equal',

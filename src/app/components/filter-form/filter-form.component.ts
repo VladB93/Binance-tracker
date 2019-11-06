@@ -1,7 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FilterService } from 'src/app/services/filter/filter.service';
 import { Filter } from 'src/app/interfaces';
-import { FilterType, ComparisonType, IntervalType } from 'src/app/enums';
+import { FilterType, ComparisonType } from 'src/app/enums';
+import { FormControl, FormGroup } from 'ngx-strongly-typed-forms';
+import { Validators, ValidationErrors } from '@angular/forms';
+import { IgxDialogComponent } from 'igniteui-angular';
 
 @Component({
   selector: 'app-filter-form',
@@ -9,23 +12,57 @@ import { FilterType, ComparisonType, IntervalType } from 'src/app/enums';
   styleUrls: ['./filter-form.component.scss']
 })
 export class FilterFormComponent {
-  public filter: Filter = {
-    percentage: 0,
-  };
+  @ViewChild(IgxDialogComponent, {static: true}) dialogForm: IgxDialogComponent;
+
+  private errors = [];
+
+  public filterForm = new FormGroup<Filter>({
+    type: new FormControl<FilterType>(null, Validators.required),
+    interval: new FormControl<number>(null, [Validators.max(500), Validators.required]),
+    comparison: new FormControl<ComparisonType>(null, Validators.required),
+    percentage: new FormControl<number>(null, Validators.required)
+  });
   public ComparisonType = ComparisonType;
   public FilterType = FilterType;
-  public IntervalType = IntervalType;
 
-  constructor(private filterService: FilterService){}
+  constructor(private filterService: FilterService) {}
 
-  public addFilter(filter: Filter){
-    console.log(this.filter)
-    this.filterService.addFilter();
+  public addFilter() {
+    this.getFormValidationErrors();
+    this.filterService.addFilter(this.filterForm.value);
+    this.filterForm.reset();
   }
 
-  public setValue(value){
-    if(value <= 500){
-      this.filter.interval = value;
+  private getFormValidationErrors() {
+    this.errors = [];
+    Object.keys(this.filterForm.controls).forEach((key: any) => {
+      const controlErrors: ValidationErrors = this.filterForm.get(key).errors;
+      if (controlErrors != null) {
+        Object.keys(controlErrors).forEach(keyError => {
+          this.errors.push({
+            'Key Control': key,
+            'Key Error': keyError,
+            'Err Value': controlErrors[keyError]
+          });
+        });
+      }
+    });
+    let message = '';
+    this.errors.forEach((e: any) => {
+      message += `${e['Key Control'].toUpperCase()} `;
+      if (e['Key Error'] === 'max') {
+        message += ` maximum value is ${e['Err Value'].max}`;
+      }
+      if (e['Key Error'] === 'required') {
+        message += 'is required';
+      }
+      message += '\n';
+    });
+    if (message !== '') {
+      alert(message);
+    } else {
+      this.dialogForm.close();
     }
   }
+
 }
