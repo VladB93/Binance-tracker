@@ -19,4 +19,9 @@ export class FiltersComponent {
       this.filters = filters;
     });
   }
+
+  filterApplyChanged(el: Filter) {
+    el.apply = !el.apply;
+
+  }
 }

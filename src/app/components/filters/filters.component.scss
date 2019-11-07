@@ -4,3 +4,14 @@
   margin-top: 10px;
 }
 
+.container {
+  display: flex;
+}
+
+igx-icon {
+  vertical-align: middle;
+  &:hover {
+    color: blue;
+    cursor: pointer;
+  }
+}

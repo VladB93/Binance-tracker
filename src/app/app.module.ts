@@ -9,7 +9,8 @@ import {
   IgxSelectModule,
   IgxInputGroupModule,
   IgxRadioModule,
-  IgxCheckboxModule
+  IgxCheckboxModule,
+  IgxIconModule
 } from 'igniteui-angular';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -37,7 +38,8 @@ import { FiltersComponent } from './components/filters/filters.component';
     IgxRadioModule,
     ReactiveFormsModule,
     NgxStronglyTypedFormsModule,
-    IgxCheckboxModule
+    IgxCheckboxModule,
+    IgxIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]
