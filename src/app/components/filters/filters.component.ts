@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FilterService } from 'src/app/services/filter/filter.service';
 import { Filter } from 'src/app/interfaces';
-import { ComparisonType } from 'src/app/enums';
+import { ComparisonType, FilterType } from 'src/app/enums';
 
 @Component({
   selector: 'app-filters',
@@ -12,11 +12,11 @@ export class FiltersComponent {
   public filters: Filter[] = [];
 
   public ComparisonType = ComparisonType;
+  public FilterType = FilterType;
 
   constructor(private filterService: FilterService) {
     this.filterService.filters$.subscribe((filters: Filter[]) => {
       this.filters = filters;
-      console.log(this.filters)
     });
   }
 }

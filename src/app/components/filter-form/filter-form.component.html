@@ -34,9 +34,23 @@
            
         </ng-container>
         <ng-container *ngIf="filterForm.value.type === FilterType.volume">
-            <span>change</span>
-            <label igxLabel for="phone">Phone</label>
-            <!-- <input igxInput name="phone" type="text" [(ngModel)]="user.phone" /> -->
+            <span class="filter-form-header">Volume change</span>
+            <igx-radio-group name="type" formControlName="comparison">
+                <igx-radio [value]="ComparisonType.lessOrEqual" name="ComparisonType">{{ComparisonType.lessOrEqual}}</igx-radio>
+                <igx-radio [value]="ComparisonType.moreOrEqual" name="ComparisonType">{{ComparisonType.moreOrEqual}}</igx-radio>
+            </igx-radio-group>
+            <ng-container *ngIf="filterForm.value.comparison != null">
+                <igx-input-group>   
+                    <igx-prefix>to</igx-prefix>      
+                        <input igxInput name="percentage" formControlName="percentage" type="number" required/>
+                    <igx-suffix>% of Daily Volume</igx-suffix>
+                </igx-input-group>
+                <span class="filter-form-header">In the past</span>
+                <igx-input-group>
+                    <input igxInput name="interval" type="number" formControlName="interval" required/>
+                </igx-input-group>
+                Minute(s)
+            </ng-container>
         </ng-container>
     </form>
 </igx-dialog>

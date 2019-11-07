@@ -1,3 +1,9 @@
 <igx-checkbox *ngFor="let filter of filters" [checked]="filter.apply">
-  {{ filter.type }} change {{ filter.comparison === ComparisonType.lessOrEqual? '≤' : '≥' }} to {{filter.percentage}}% in the last {{filter.interval}}'
+  <ng-container *ngIf="filter.type === FilterType.price">
+      {{ filter.type }} change {{ filter.comparison === ComparisonType.lessOrEqual? '≤' : '≥' }} to {{filter.percentage}}% in the last {{filter.interval}}'
+  </ng-container>
+  <ng-container *ngIf="filter.type === FilterType.volume">
+      {{ filter.type }} change {{ filter.comparison === ComparisonType.lessOrEqual? '≤' : '≥' }} to {{filter.percentage}}% of Daily Volume
+      in the last {{filter.interval}}'
+  </ng-container>
 </igx-checkbox>
