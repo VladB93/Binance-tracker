@@ -9,7 +9,7 @@ import { ComparisonType, FilterType } from 'src/app/enums';
   styleUrls: ['./filters.component.scss']
 })
 export class FiltersComponent {
-  public filters: Filter[] =  [];
+  public filters: Filter[] = [];
 
   public ComparisonType = ComparisonType;
   public FilterType = FilterType;
@@ -22,10 +22,16 @@ export class FiltersComponent {
 
   filterApplyChanged(el: Filter) {
     el.apply = !el.apply;
-    console.log(this.filters);
   }
 
   remove(id: string) {
-    this.filterService.removeFilter(id);
+    const response = confirm('Do you want to remove this filter?');
+    if (response) {
+      this.filterService.removeFilter(id);
+    }
+  }
+
+  edit(filter: Filter){
+    this.filterService.editFilter(filter);
   }
 }

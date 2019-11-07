@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Filter } from 'src/app/interfaces';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FilterService {
   private filters = new Map();
+  public editFilter$ = new Subject();
   public filters$ = new BehaviorSubject<Map<string, Filter>>(new Map());
 
   addFilter(filter: Filter) {
@@ -21,5 +22,9 @@ export class FilterService {
   removeFilter(id: string) {
     this.filters.delete(id);
     this.filters$.next(this.filters);
+  }
+
+  editFilter(filter: Filter){
+    this.editFilter$.next(filter);
   }
 }

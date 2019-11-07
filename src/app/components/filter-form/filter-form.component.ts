@@ -27,7 +27,19 @@ export class FilterFormComponent {
   public ComparisonType = ComparisonType;
   public FilterType = FilterType;
 
-  constructor(private filterService: FilterService) {}
+  constructor(private filterService: FilterService) {
+    this.filterService.editFilter$.subscribe((e: Filter) => {
+      this.filterForm  = new FormGroup<Filter>({
+        id: new FormControl<string>(e.id),
+        type: new FormControl<FilterType>(e.type, Validators.required),
+        interval: new FormControl<number>(e.interval, [Validators.max(500), Validators.required, Validators.min(1)]),
+        comparison: new FormControl<ComparisonType>(e.comparison, Validators.required),
+        percentage: new FormControl<number>(e.percentage, Validators.required),
+      });
+      // this.filterForm.setValue(e);
+      this.dialogForm.open();
+    });
+  }
 
   public addFilter() {
     this.getFormValidationErrors();
@@ -65,7 +77,9 @@ export class FilterFormComponent {
       alert(message);
     } else {
       this.dialogForm.close();
-      this.filterForm.value.id = uuid();
+      if(!this.filterForm.value.id){
+        this.filterForm.value.id = uuid();
+      }
       this.filterForm.value.apply = true;
       this.filterService.addFilter(this.filterForm.value);
       this.filterForm.reset();
