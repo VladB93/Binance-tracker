@@ -18,9 +18,9 @@ export class FilterFormComponent {
 
   public filterForm = new FormGroup<Filter>({
     type: new FormControl<FilterType>(null, Validators.required),
-    interval: new FormControl<number>(null, [Validators.max(500), Validators.required]),
+    interval: new FormControl<number>(null, [Validators.max(500), Validators.required, Validators.min(1)]),
     comparison: new FormControl<ComparisonType>(null, Validators.required),
-    percentage: new FormControl<number>(null, Validators.required)
+    percentage: new FormControl<number>(null, Validators.required),
   });
   public ComparisonType = ComparisonType;
   public FilterType = FilterType;
@@ -29,8 +29,6 @@ export class FilterFormComponent {
 
   public addFilter() {
     this.getFormValidationErrors();
-    this.filterService.addFilter(this.filterForm.value);
-    this.filterForm.reset();
   }
 
   private getFormValidationErrors() {
@@ -53,6 +51,9 @@ export class FilterFormComponent {
       if (e['Key Error'] === 'max') {
         message += ` maximum value is ${e['Err Value'].max}`;
       }
+      if (e['Key Error'] === 'min') {
+        message += ` minimum value is ${e['Err Value'].min}`;
+      }
       if (e['Key Error'] === 'required') {
         message += 'is required';
       }
@@ -62,6 +63,9 @@ export class FilterFormComponent {
       alert(message);
     } else {
       this.dialogForm.close();
+      this.filterForm.value.apply = true;
+      this.filterService.addFilter(this.filterForm.value);
+      this.filterForm.reset();
     }
   }
 

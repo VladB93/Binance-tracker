@@ -72,5 +72,5 @@ export interface Filter {
   interval?: number;
   comparison?: ComparisonType;
   percentage?: number;
-  toApply?: boolean;
+  apply?: boolean;
 }
