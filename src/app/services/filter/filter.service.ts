@@ -6,15 +6,20 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class FilterService {
-  private filters = [];
-  public filters$ = new BehaviorSubject<Filter[]>([]);
+  private filters = new Map();
+  public filters$ = new BehaviorSubject<Map<string, Filter>>(new Map());
 
   addFilter(filter: Filter) {
-    this.filters.push(filter);
+    this.filters.set(filter.id, filter);
     this.filters$.next(this.filters);
   }
 
   getFilters() {
 
+  }
+
+  removeFilter(id: string) {
+    this.filters.delete(id);
+    this.filters$.next(this.filters);
   }
 }

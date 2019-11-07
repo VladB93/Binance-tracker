@@ -1,4 +1,4 @@
-<div class="container" *ngFor="let filter of filters">
+<div class="container" *ngFor="let filter of filters; let i = index">
   <igx-checkbox  [(checked)]="filter.apply" (change)="filterApplyChanged(filter)">
       <ng-container *ngIf="filter.type === FilterType.price">
           {{ filter.type }} change {{ filter.comparison === ComparisonType.lessOrEqual? '≤' : '≥' }} to {{filter.percentage}}% in the last {{filter.interval}}'
@@ -8,6 +8,6 @@
           in the last {{filter.interval}}'
       </ng-container>
     </igx-checkbox>
-  <igx-icon>more_horiz</igx-icon>
-  <igx-icon>close</igx-icon>  
+  <igx-icon >more_horiz</igx-icon>
+  <igx-icon (click)="remove(filter.id)">close</igx-icon>  
 </div>
