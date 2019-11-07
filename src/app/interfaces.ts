@@ -68,6 +68,7 @@ export interface TaggedGridEntry {
 }
 
 export interface Filter {
+  id: string;
   type?: FilterType;
   interval?: number;
   comparison?: ComparisonType;

@@ -22,6 +22,6 @@ export class FiltersComponent {
 
   filterApplyChanged(el: Filter) {
     el.apply = !el.apply;
-
+    console.log(this.filters);
   }
 }

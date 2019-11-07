@@ -5,6 +5,7 @@ import { FilterType, ComparisonType } from 'src/app/enums';
 import { FormControl, FormGroup } from 'ngx-strongly-typed-forms';
 import { Validators, ValidationErrors } from '@angular/forms';
 import { IgxDialogComponent } from 'igniteui-angular';
+import uuid from 'uuidv4';
 
 @Component({
   selector: 'app-filter-form',
@@ -17,6 +18,7 @@ export class FilterFormComponent {
   private errors = [];
 
   public filterForm = new FormGroup<Filter>({
+    id: new FormControl<string>(),
     type: new FormControl<FilterType>(null, Validators.required),
     interval: new FormControl<number>(null, [Validators.max(500), Validators.required, Validators.min(1)]),
     comparison: new FormControl<ComparisonType>(null, Validators.required),
@@ -63,6 +65,7 @@ export class FilterFormComponent {
       alert(message);
     } else {
       this.dialogForm.close();
+      this.filterForm.value.id = uuid();
       this.filterForm.value.apply = true;
       this.filterService.addFilter(this.filterForm.value);
       this.filterForm.reset();
