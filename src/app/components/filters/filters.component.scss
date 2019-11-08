@@ -10,8 +10,13 @@
 
 igx-icon {
   vertical-align: middle;
+  color: white!important;
   &:hover {
-    color: blue;
+    color: yellow!important;
     cursor: pointer;
+    &.remove {
+      color: red!important;
+    }
   }
 }
+
