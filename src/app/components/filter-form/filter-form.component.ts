@@ -23,20 +23,14 @@ export class FilterFormComponent {
     interval: new FormControl<number>(null, [Validators.max(500), Validators.required, Validators.min(1)]),
     comparison: new FormControl<ComparisonType>(null, Validators.required),
     percentage: new FormControl<number>(null, Validators.required),
+    apply: new FormControl<boolean>()
   });
   public ComparisonType = ComparisonType;
   public FilterType = FilterType;
 
   constructor(private filterService: FilterService) {
     this.filterService.editFilter$.subscribe((e: Filter) => {
-      this.filterForm  = new FormGroup<Filter>({
-        id: new FormControl<string>(e.id),
-        type: new FormControl<FilterType>(e.type, Validators.required),
-        interval: new FormControl<number>(e.interval, [Validators.max(500), Validators.required, Validators.min(1)]),
-        comparison: new FormControl<ComparisonType>(e.comparison, Validators.required),
-        percentage: new FormControl<number>(e.percentage, Validators.required),
-      });
-      // this.filterForm.setValue(e);
+      this.filterForm.setValue(e);
       this.dialogForm.open();
     });
   }
