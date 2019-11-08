@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { RestApiService } from '../rest-api/rest-api.service';
 import { Subject } from 'rxjs';
 import { WebSocketKlineService } from '../websocket-kline/websocket-kline.service';
-import { CoinKlines, ObjectKlines, WebSocketKline } from 'src/app/interfaces';
-import { convertArrayKlineToObject, toBeTagged } from 'src/app/helpers';
+import { CoinKlines, ObjectKlines } from 'src/app/interfaces';
+import { convertArrayKlineToObject } from 'src/app/helpers';
 
 @Injectable({
   providedIn: 'root'
@@ -15,10 +15,13 @@ export class StoreService {
   constructor(private restApiService: RestApiService, private webSocketKlineService: WebSocketKlineService) {
     this.restApiService.klinesForMainSymbolCoins.subscribe((e: Array<CoinKlines>) => {
       this.coinKlinesData = convertArrayKlineToObject(e);
-      this.webSocketKlineService.streamKlines(e);
+      console.log(this.coinKlinesData, 'created');
+      this.webSocketKlineService.streamKlines(this.coinKlinesData);
       this.coinKlinesSubject.next(this.coinKlinesData);
-      this.webSocketKlineService.wsKlineStream.subscribe((wsStream: WebSocketKline) => {
-        this.handleStream(wsStream);
+      this.webSocketKlineService.wsKlineStream.subscribe((wsStream: ObjectKlines) => {
+        this.coinKlinesData = wsStream;
+        console.log(wsStream, 'updated');
+        this.coinKlinesSubject.next(this.coinKlinesData);
       });
     });
   }
@@ -27,13 +30,4 @@ export class StoreService {
     this.restApiService.loadExchangeInfo();
   }
 
-  private handleStream(wsStream: WebSocketKline) {
-    const streamName = wsStream.Kline.SymbolName;
-    const newData = this.coinKlinesData[streamName].data;
-    newData.shift();
-    newData.push(wsStream.Kline);
-    this.coinKlinesData[streamName].data = newData;
-    this.coinKlinesData[streamName].tagged = toBeTagged(newData);
-    this.coinKlinesSubject.next(this.coinKlinesData);
-  }
 }

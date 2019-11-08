@@ -44,7 +44,9 @@ export interface TradingSymbol {
 export interface CoinKlines {
   coin: TradingSymbol;
   data: Array<WebSocketK>;
-  tagged: boolean;
+  tagged?: boolean;
+  updatedInThePastMinute?: boolean;
+  dailyVolume?: number;
 }
 
 export interface BinanceKline {
@@ -65,6 +67,12 @@ export interface TaggedGridEntry {
   '% change(15m)'?: number;
   '% change(1h)'?: number;
   '% change(4h)'?: number;
+  date?: Date;
+}
+
+export interface DailyVolume {
+  SymbolName?: string;
+  DailyVolume?: number;
 }
 
 export interface Filter {

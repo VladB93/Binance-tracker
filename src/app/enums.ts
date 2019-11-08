@@ -34,3 +34,7 @@ export enum ComparisonType {
   'moreOrEqual' = 'More or Equal',
   'lessOrEqual' = 'Less or Equal',
 }
+export enum WebSocketFeed {
+  klines = 'klines',
+  dailyVolume = 'dailyVolume'
+}
