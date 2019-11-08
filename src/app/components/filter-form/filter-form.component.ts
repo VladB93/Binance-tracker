@@ -86,4 +86,9 @@ export class FilterFormComponent {
     }
   }
 
+  public close(){
+    this.filterForm.reset();
+    this.dialogForm.close();
+  }
+
 }

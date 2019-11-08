@@ -1,7 +1,7 @@
 <button (click)="form.open()" igxButton="raised" igxRipple="white">Add Filter</button>
 <igx-dialog #form title="Filter"
     leftButtonLabel="Cancel"
-    (onLeftButtonSelect)="form.close()"
+    (onLeftButtonSelect)="close()"
     (onRightButtonSelect)="addFilter()"
     rightButtonLabel="Add"
     [closeOnOutsideSelect]="false"
